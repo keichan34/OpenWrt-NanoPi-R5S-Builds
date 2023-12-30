@@ -14,6 +14,10 @@ cd "$ROOTDIR/build"
 rm -rf stangri_repo
 git clone https://github.com/stangri/source.openwrt.melmac.net stangri_repo
 
+# clone nat46 repo
+rm -rf nat46_repo
+git clone https://github.com/ayourtch/nat46 nat46_repo
+
 # install feeds
 cd openwrt
 ./scripts/feeds update -a
@@ -23,6 +27,10 @@ rm -rf feeds/packages/net/pbr/
 cp -R ../stangri_repo/pbr feeds/packages/net/
 rm -rf feeds/luci/applications/luci-app-pbr
 cp -R ../stangri_repo/luci-app-pbr feeds/luci/applications/
+
+# add nat46 packages
+rm -rf feeds/packages/net/nat46/
+cp -R ../nat46_repo/nat46 feeds/packages/net/
 
 # replace acme & haproxy with newer versions taken from master
 #rm -rf feeds/packages/net/acme*
